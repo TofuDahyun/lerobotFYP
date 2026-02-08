@@ -241,6 +241,10 @@ def make_pre_post_processors(
         NotImplementedError: If a processor factory is not implemented for the given
             policy configuration type.
     """
+    # Normalize path to use forward slashes for HuggingFace Hub repo IDs on Windows, changed on 010226
+    if pretrained_path:
+        pretrained_path = str(pretrained_path).replace("\\", "/")
+    
     if pretrained_path:
         # TODO(Steven): Temporary patch, implement correctly the processors for Gr00t
         if isinstance(policy_cfg, GrootConfig):
@@ -488,7 +492,9 @@ def make_policy(
     if cfg.pretrained_path and not cfg.use_peft:
         # Load a pretrained policy and override the config if needed (for example, if there are inference-time
         # hyperparameters that we want to vary).
-        kwargs["pretrained_name_or_path"] = cfg.pretrained_path
+        
+        # Normalize path to use forward slashes for HuggingFace Hub repo IDs on Windows, change on 010226
+        kwargs["pretrained_name_or_path"] = str(cfg.pretrained_path).replace("\\", "/")
         policy = policy_cls.from_pretrained(**kwargs)
     elif cfg.pretrained_path and cfg.use_peft:
         # Load a pretrained PEFT model on top of the policy. The pretrained path points to the folder/repo
@@ -498,7 +504,8 @@ def make_policy(
 
         logging.info("Loading policy's PEFT adapter.")
 
-        peft_pretrained_path = cfg.pretrained_path
+        # Normalize path to use forward slashes for HuggingFace Hub repo IDs on Windows, change on 010226
+        peft_pretrained_path = str(cfg.pretrained_path).replace("\\", "/")
         peft_config = PeftConfig.from_pretrained(peft_pretrained_path)
 
         kwargs["pretrained_name_or_path"] = peft_config.base_model_name_or_path
