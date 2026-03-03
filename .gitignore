@@ -180,3 +180,11 @@ outputs/
 
 #my own
 outputs/
+imagesegpics/
+imagesegthings/images
+imagesegthings/labels
+imagesegthings/runs
+imagesegthings/test_images
+imagesegthings/yolo26n-seg.pt
+imagesegthings/yolo26n.pt
+imagesegthings/yolov8n-seg.pt

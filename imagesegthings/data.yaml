@@ -1,0 +1,7 @@
+names:
+  0: robotic_arm
+  1: has_item
+  2: no_item
+path: .
+train: images/train
+val: images/val

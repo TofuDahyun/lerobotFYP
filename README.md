@@ -95,6 +95,16 @@ lerobot-record --robot.type=so101_follower --robot.port=COM4 --robot.id=follower
 lerobot-record --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ front: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --dataset.repo_id=TofuDahyun/test6 --dataset.num_episodes=1 --dataset.episode_time_s=10 --dataset.single_task="Pick up the cube" --dataset.push_to_hub=false
 ```
 
+
+lerobot-record --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ front: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --dataset.repo_id=TofuDahyun/test7 --dataset.num_episodes=2 --dataset.episode_time_s=60 --dataset.single_task="Pick up the toy car and place it in the box" --dataset.push_to_hub=false --resume=True
+
+lerobot-record --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ front: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --dataset.repo_id=TofuDahyun/toy_car_train_280226 --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.single_task="Pick up the toy car and place it in the box" 
+
+lerobot-record --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ front: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --dataset.repo_id=TofuDahyun/toy_car_train_280226 --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.single_task="Pick up the toy car and place it in the box" --resume=True
+
+
+
+
 Video is saved to local directory of: `C:\Users\User\.cache\huggingface\lerobot\TofuDahyun\test6\videos\observation.images.front\chunk-000`
 
 **Records 1 episode for the picking up of toy car but does not upload it to hub**
