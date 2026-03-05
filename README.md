@@ -1,6 +1,17 @@
 # This is my guide NOW
 
 ***
+## Installation
+```
+conda create -n lerobot4 python=3.10 -y
+conda activate lerobot4
+
+pip install . -e
+pip install -e ".[feetech]"
+pip install -e ".[smolvla]"
+```
+
+***
 
 ## On Launch
 ```
@@ -152,6 +163,14 @@ lerobot-train --dataset.repo_id=TofuDahyun/toy_car_train_010226 --policy.path=le
 ```
 lerobot-train --dataset.repo_id=TofuDahyun/toy_car_train_010226 --policy.type=act --batch_size=8 --steps=5000 --output_dir=outputs/train/act_policy_output_toy_car_train_010226 --job_name=act_policy_output_toy_car_train_010226 --policy.device=cuda --wandb.enable=true --policy.repo_id=TofuDahyun/act_policy_output_toy_car_train_010226 --policy.private=true
 ```
+
+**Testing inference with trained evaluation model**
+lerobot-record  --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ front: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --display_data=false --dataset.repo_id=TofuDahyun/eval_policy_output_toy_car_train_280226_test2 --dataset.single_task="Pick up the toy car and place it in the box" --policy.path=TofuDahyun/policy_output_toy_car_train_280226_test2
+
+**Testing inference with trained evaluation model(WORKING)**
+lerobot-record  --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ camera1: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --display_data=false --dataset.repo_id=TofuDahyun/eval_policy_output_toy_car_train_280226_test2_2 --dataset.single_task="Pick up the toy car and place it in the box" --policy.path=TofuDahyun/policy_output_toy_car_train_280226_test2 --policy.empty_cameras=2 --policy.resize_imgs_with_padding="[256,256]" --policy.device=cuda
+
+python lerobot_record_with_segmentation.py --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ camera1: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --display_data=false --dataset.repo_id=TofuDahyun/eval_policy_output_toy_car_train_280226_test2_2 --dataset.single_task="Pick up the toy car and place it in the box" --policy.path=TofuDahyun/policy_output_toy_car_train_280226_test2 --policy.empty_cameras=2 --policy.resize_imgs_with_padding="[256,256]" --policy.device=cuda
 
 **To run the testing script with camera, made by my own**
 ```
