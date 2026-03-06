@@ -397,10 +397,17 @@ def record_loop(
                                 if has_item_detected:
                                     drop_counter += 1
                                     logging.warning(f"⚠️ [{timestamp:.1f}s] 🔴 DROP: {drop_counter}/10 frames")
-                                    if drop_counter >= 10:
-                                        logging.critical(f"❌ [{timestamp:.1f}s] 💥 Dropped for 10+ consecutive frames - EXITING PROGRAM")
-                                        events["exit_early"] = True
+                                    
+                                    if drop_counter >= 10: # Place to change threshold for drop_counter
+                                        logging.critical(f"❌ [{timestamp:.1f}s] 💥 Dropped for 10+ consecutive frames - STOPPING RECORDING")
+                                        events["stop_recording"] = True  # This stops the entire program like ESC
+                                        events["exit_early"] = True      # Also break current loop
                                         break  # Exit loop immediately
+            
+                                    # if drop_counter >= 10:
+                                    #     logging.critical(f"❌ [{timestamp:.1f}s] 💥 Dropped for 10+ consecutive frames - EXITING PROGRAM")
+                                    #     events["exit_early"] = True
+                                    #     break  # Exit loop immediately
                                 # If hasn't caught item yet, ignore no_item detections
                                 
                         else:
