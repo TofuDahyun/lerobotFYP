@@ -9,6 +9,9 @@ conda activate lerobot4
 pip install . -e
 pip install -e ".[feetech]"
 pip install -e ".[smolvla]"
+
+# for langchain things
+pip install langchain langchain-deepseek python-dotenv
 ```
 
 ***
@@ -170,7 +173,12 @@ lerobot-record  --robot.type=so101_follower --robot.port=COM4 --robot.id=followe
 **Testing inference with trained evaluation model(WORKING)**
 lerobot-record  --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ camera1: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --display_data=false --dataset.repo_id=TofuDahyun/eval_policy_output_toy_car_train_280226_test2_2 --dataset.single_task="Pick up the toy car and place it in the box" --policy.path=TofuDahyun/policy_output_toy_car_train_280226_test2 --policy.empty_cameras=2 --policy.resize_imgs_with_padding="[256,256]" --policy.device=cuda
 
-python lerobot_record_with_segmentation.py --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ camera1: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --display_data=false --dataset.repo_id=TofuDahyun/eval_policy_output_toy_car_train_280226_test2_2 --dataset.single_task="Pick up the toy car and place it in the box" --policy.path=TofuDahyun/policy_output_toy_car_train_280226_test2 --policy.empty_cameras=2 --policy.resize_imgs_with_padding="[256,256]" --policy.device=cuda
+
+python lerobot_record_with_segmentation.py --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ camera1: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --display_data=false --dataset.single_task="Pick up the toy car and place it in the box" --policy.path=TofuDahyun/policy_output_toy_car_train_280226_test2 --policy.empty_cameras=2 --policy.resize_imgs_with_padding="[256,256]" --policy.device=cuda --dataset.seg_confidence=0.6 --dataset.seg_detection_interval=3 --dataset.drop_threshold_frames=10 --dataset.repo_id=TofuDahyun/eval_policy_output_toy_car_train_280226_test2_20
+
+python lerobot_record_with_seg_regenerated.py --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ camera1: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --display_data=false --dataset.single_task="Pick up the toy car and place it in the box" --policy.path=TofuDahyun/policy_output_toy_car_train_280226_test2 --policy.empty_cameras=2 --policy.resize_imgs_with_padding="[256,256]" --policy.device=cuda --dataset.repo_id=TofuDahyun/eval_policy_output_toy_car_train_280226_test2_24
+
+
 
 **To run the testing script with camera, made by my own**
 ```
