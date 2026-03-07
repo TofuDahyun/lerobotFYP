@@ -12,6 +12,9 @@ pip install -e ".[smolvla]"
 
 # for langchain things
 pip install langchain langchain-deepseek python-dotenv
+
+#for speech recog things
+pip install SpeechRecognition pyaudio
 ```
 
 ***
@@ -178,7 +181,9 @@ python lerobot_record_with_segmentation.py --robot.type=so101_follower --robot.p
 
 python lerobot_record_with_seg_regenerated.py --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ camera1: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --display_data=false --dataset.single_task="Pick up the toy car and place it in the box" --policy.path=TofuDahyun/policy_output_toy_car_train_280226_test2 --policy.empty_cameras=2 --policy.resize_imgs_with_padding="[256,256]" --policy.device=cuda --dataset.repo_id=TofuDahyun/eval_policy_output_toy_car_train_280226_test2_24
 
+something that is not working is the customised detection intervals etc and also i need to make sure that when the robot fails for 4 times and goes into reset mode, the image segmentation model stops too
 
+python lerobot_record_with_speech.py --robot.type=so101_follower --robot.port=COM4 --robot.id=follower_arm --robot.cameras="{ camera1: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=leader_arm --display_data=false --dataset.single_task="Pick up the toy car and place it in the box" --policy.path=TofuDahyun/policy_output_toy_car_train_280226_test2 --policy.empty_cameras=2 --policy.resize_imgs_with_padding="[256,256]" --policy.device=cuda --dataset.repo_id=TofuDahyun/eval_policy_output_toy_car_train_280226_test2_24
 
 **To run the testing script with camera, made by my own**
 ```
